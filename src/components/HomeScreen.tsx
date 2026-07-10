@@ -1,4 +1,5 @@
 import type { Language } from "../data/stories";
+import { assetPath } from "../utils/assets";
 import { LanguageToggle } from "./LanguageToggle";
 
 type Props = {
@@ -19,7 +20,7 @@ export function HomeScreen({ language, onLanguageChange, onStart }: Props) {
       </div>
 
       <div className="storybox-hero" aria-label="Cute story machine illustration">
-        <img src="/assets/references/home-reference.png" alt="" />
+        <img src={assetPath("assets/references/home-reference.png")} alt="" />
         <div className="star star-a">✦</div>
         <div className="star star-b">✧</div>
         <div className="star star-c">✦</div>

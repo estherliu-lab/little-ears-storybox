@@ -1,3 +1,5 @@
+import { assetPath } from "../utils/assets";
+
 export type StoryMode = "bedtime" | "brave" | "meal" | "hug";
 
 export type CharacterId = "lamb" | "bunny" | "cat" | "dog" | "bear" | "duck";
@@ -34,12 +36,12 @@ export const characters: Record<
     image: string;
   }
 > = {
-  lamb: { zh: "小羊", en: "Little Lamb", emoji: "🐑", color: "#c9c0f2", image: "/assets/characters/lamb.png" },
-  bunny: { zh: "小兔", en: "Little Bunny", emoji: "🐰", color: "#f5a9a9", image: "/assets/characters/bunny.png" },
-  cat: { zh: "小猫", en: "Little Cat", emoji: "🐱", color: "#c9a7e8", image: "/assets/characters/cat.png" },
-  dog: { zh: "小狗", en: "Little Puppy", emoji: "🐶", color: "#f6d28b", image: "/assets/characters/dog.png" },
-  bear: { zh: "小熊", en: "Little Bear", emoji: "🐻", color: "#cfe1ba", image: "/assets/characters/bear.png" },
-  duck: { zh: "小鸭", en: "Little Duck", emoji: "🐥", color: "#a8d7e8", image: "/assets/characters/duck.png" },
+  lamb: { zh: "小羊", en: "Little Lamb", emoji: "🐑", color: "#c9c0f2", image: assetPath("assets/characters/lamb.png") },
+  bunny: { zh: "小兔", en: "Little Bunny", emoji: "🐰", color: "#f5a9a9", image: assetPath("assets/characters/bunny.png") },
+  cat: { zh: "小猫", en: "Little Cat", emoji: "🐱", color: "#c9a7e8", image: assetPath("assets/characters/cat.png") },
+  dog: { zh: "小狗", en: "Little Puppy", emoji: "🐶", color: "#f6d28b", image: assetPath("assets/characters/dog.png") },
+  bear: { zh: "小熊", en: "Little Bear", emoji: "🐻", color: "#cfe1ba", image: assetPath("assets/characters/bear.png") },
+  duck: { zh: "小鸭", en: "Little Duck", emoji: "🐥", color: "#a8d7e8", image: assetPath("assets/characters/duck.png") },
 };
 
 export const modeLabels: Record<StoryMode | "all", { zh: string; en: string; icon: string }> = {
@@ -61,7 +63,7 @@ export const stories: Story[] = [
       en: "Little Lamb placed a soft cloud beside the bed. The moon shone through the window like a warm blanket. Lamb hugged a blue pillow and listened as the wind whispered good night. The stars blinked slowly. Lamb blinked slowly too. Soon, in the sweet smell of grass, Lamb fell asleep.",
     },
     moral: { zh: "慢慢安静下来，夜晚会抱住你。", en: "When you grow quiet, nighttime can hold you softly." },
-    audio: { zh: "/assets/audio/zh/lamb-bedtime-moon.mp3", en: "/assets/audio/en/lamb-bedtime-moon.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/lamb-bedtime-moon.mp3"), en: assetPath("assets/audio/en/lamb-bedtime-moon.mp3") },
     durationSeconds: 45,
   },
   {
@@ -74,7 +76,7 @@ export const stories: Story[] = [
       en: "Little Lamb had a tiny bell that rang ding-ding. Little Bunny heard it and smiled with bright eyes. Lamb put the bell in Bunny's paws. Together they shook it gently, ding-ding, ding-ding. The sound felt like small stars landing in the grass. At the end, Lamb and Bunny shared a hug, and the bell rang softly too.",
     },
     moral: { zh: "一起听见快乐，快乐会更暖。", en: "Shared joy feels even warmer." },
-    audio: { zh: "/assets/audio/zh/lamb-share-bells.mp3", en: "/assets/audio/en/lamb-share-bells.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/lamb-share-bells.mp3"), en: assetPath("assets/audio/en/lamb-share-bells.mp3") },
     durationSeconds: 50,
   },
   {
@@ -87,7 +89,7 @@ export const stories: Story[] = [
       en: "The rain stopped, and a shiny puddle sat on the path. Little Bunny stopped and saw a cloud inside the water. Bunny stretched out one paw and tapped it softly. The puddle made little round smiles. Bunny took a quiet breath and hopped across. Plip-plop! Bunny looked back and found a brave feeling waiting there.",
     },
     moral: { zh: "小小一步，也可以很勇敢。", en: "One tiny step can be brave." },
-    audio: { zh: "/assets/audio/zh/bunny-brave-puddle.mp3", en: "/assets/audio/en/bunny-brave-puddle.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/bunny-brave-puddle.mp3"), en: assetPath("assets/audio/en/bunny-brave-puddle.mp3") },
     durationSeconds: 48,
   },
   {
@@ -100,7 +102,7 @@ export const stories: Story[] = [
       en: "Before bedtime, Bunny's blocks were still lined up on the rug. The red block jumped into the basket, and the yellow block followed. Bunny hummed a tiny song and helped the car and the ball go home. The basket became round and full. The room became soft and quiet. Bunny clapped gently and said, good night, toys.",
     },
     moral: { zh: "东西回到家，房间也会安心。", en: "When things go home, the room feels peaceful." },
-    audio: { zh: "/assets/audio/zh/bunny-cleanup-basket.mp3", en: "/assets/audio/en/bunny-cleanup-basket.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/bunny-cleanup-basket.mp3"), en: assetPath("assets/audio/en/bunny-cleanup-basket.mp3") },
     durationSeconds: 52,
   },
   {
@@ -113,7 +115,7 @@ export const stories: Story[] = [
       en: "Little Cat smelled a bowl of pumpkin soup. A tiny green onion star floated on top. Cat blew gently, then took one small sip. Ahh, warm flavor went all the way to the tummy. Cat nibbled a soft piece of bread too. The little tail began to sway, as if it was saying, this feels very cozy.",
     },
     moral: { zh: "慢慢尝一口，肚子会知道喜欢。", en: "Try one small taste and let your tummy listen." },
-    audio: { zh: "/assets/audio/zh/cat-meal-soup.mp3", en: "/assets/audio/en/cat-meal-soup.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/cat-meal-soup.mp3"), en: assetPath("assets/audio/en/cat-meal-soup.mp3") },
     durationSeconds: 46,
   },
   {
@@ -126,7 +128,7 @@ export const stories: Story[] = [
       en: "Little Cat looked at the white bubbles on the toothbrush and felt a little unsure. Mama said the bubbles were light, like tiny clouds. Cat opened wide. Brush-brush in front. Brush-brush inside. The bubbles became little snowflakes and floated away. Cat looked in the mirror. The teeth were shiny, and the smile was shiny too.",
     },
     moral: { zh: "新事情可以慢慢试。", en: "A new thing can be tried slowly." },
-    audio: { zh: "/assets/audio/zh/cat-brave-brush.mp3", en: "/assets/audio/en/cat-brave-brush.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/cat-brave-brush.mp3"), en: assetPath("assets/audio/en/cat-brave-brush.mp3") },
     durationSeconds: 50,
   },
   {
@@ -139,7 +141,7 @@ export const stories: Story[] = [
       en: "Little Puppy sat by the window, sweeping the cushion with a soft tail. Outside, the wind moved. Inside, the lamp glowed. Puppy wanted a hug, so it carried a small blanket to Papa's feet. Papa knelt down and opened his arms. Puppy curled into the hug and heard a heartbeat, thump-thump, like a gentle little drum.",
     },
     moral: { zh: "想被抱抱时，可以轻轻告诉爱你的人。", en: "When you need a hug, you can gently ask someone who loves you." },
-    audio: { zh: "/assets/audio/zh/dog-hug-window.mp3", en: "/assets/audio/en/dog-hug-window.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/dog-hug-window.mp3"), en: assetPath("assets/audio/en/dog-hug-window.mp3") },
     durationSeconds: 50,
   },
   {
@@ -152,7 +154,7 @@ export const stories: Story[] = [
       en: "The small slide in the park looked shiny. Puppy climbed to the second step and paused. Little Bear waved from below and said, I am right here. Puppy sat down, held both sides, and whoosh, slid down. The wind kissed one ear. Puppy laughed and said, I would like to try again.",
     },
     moral: { zh: "有人陪着，第一次会更轻。", en: "First tries feel softer with someone nearby." },
-    audio: { zh: "/assets/audio/zh/dog-brave-slide.mp3", en: "/assets/audio/en/dog-brave-slide.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/dog-brave-slide.mp3"), en: assetPath("assets/audio/en/dog-brave-slide.mp3") },
     durationSeconds: 47,
   },
   {
@@ -165,7 +167,7 @@ export const stories: Story[] = [
       en: "Little Bear turned on the night light, and a warm yellow star appeared on the wall. Bear tucked an imaginary blanket around the star and patted the pillow three times. The room was quiet. The light flowed like honey. Bear closed both eyes and dreamed of riding in a little cloud boat.",
     },
     moral: { zh: "柔柔的光，会陪你进入梦里。", en: "A gentle light can walk with you into dreams." },
-    audio: { zh: "/assets/audio/zh/bear-bedtime-lamp.mp3", en: "/assets/audio/en/bear-bedtime-lamp.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/bear-bedtime-lamp.mp3"), en: assetPath("assets/audio/en/bear-bedtime-lamp.mp3") },
     durationSeconds: 49,
   },
   {
@@ -178,7 +180,7 @@ export const stories: Story[] = [
       en: "On the breakfast table sat a small bowl of round blueberries. Little Bear counted one berry and ate one berry. The sweet-tart taste made Bear's eyes smile. Bear saved the last berry for Little Duck. Duck said thank you, and Bear smiled back. The bowl was empty, and the morning felt bright.",
     },
     moral: { zh: "留一点给朋友，心里会甜甜的。", en: "Saving a little for a friend can feel sweet." },
-    audio: { zh: "/assets/audio/zh/bear-meal-berries.mp3", en: "/assets/audio/en/bear-meal-berries.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/bear-meal-berries.mp3"), en: assetPath("assets/audio/en/bear-meal-berries.mp3") },
     durationSeconds: 46,
   },
   {
@@ -191,7 +193,7 @@ export const stories: Story[] = [
       en: "Little Duck looked at the thin noodles in the bowl. They were like tiny rivers. Duck rolled a little bit onto the spoon, blew softly, and took a bite. The noodles slid into the tummy with a carrot smell. Duck patted the belly and giggled, quack-quack. A small noodle mountain still waited in the bowl.",
     },
     moral: { zh: "一小口一小口，饭饭会变少。", en: "Tiny bites can make the meal mountain smaller." },
-    audio: { zh: "/assets/audio/zh/duck-meal-noodles.mp3", en: "/assets/audio/en/duck-meal-noodles.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/duck-meal-noodles.mp3"), en: assetPath("assets/audio/en/duck-meal-noodles.mp3") },
     durationSeconds: 48,
   },
   {
@@ -204,7 +206,7 @@ export const stories: Story[] = [
       en: "Little Duck put on a yellow raincoat and heard drip-drop from the roof. Duck missed Mama a little, so it waddled over. Mama opened a towel like a warm cloud. Duck tucked inside, and even the raincoat got a hug. Outside, the rain sounded smaller. Inside, Duck's feelings became soft.",
     },
     moral: { zh: "抱一抱，心里的雨会小一点。", en: "A hug can make the rain inside feel smaller." },
-    audio: { zh: "/assets/audio/zh/duck-hug-raincoat.mp3", en: "/assets/audio/en/duck-hug-raincoat.mp3" },
+    audio: { zh: assetPath("assets/audio/zh/duck-hug-raincoat.mp3"), en: assetPath("assets/audio/en/duck-hug-raincoat.mp3") },
     durationSeconds: 50,
   },
 ];

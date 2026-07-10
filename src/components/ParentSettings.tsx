@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import type { Language } from "../data/stories";
+import { assetPath } from "../utils/assets";
 
 export type ParentSettingsState = {
   defaultLanguage: Language;
@@ -15,8 +17,32 @@ type Props = {
 };
 
 export function ParentSettings({ settings, onChange, onReset, onBack }: Props) {
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [showInstallGuide, setShowInstallGuide] = useState(false);
+
+  useEffect(() => {
+    function handleInstallPrompt(event: Event) {
+      event.preventDefault();
+      setInstallPrompt(event as BeforeInstallPromptEvent);
+    }
+
+    window.addEventListener("beforeinstallprompt", handleInstallPrompt);
+    return () => window.removeEventListener("beforeinstallprompt", handleInstallPrompt);
+  }, []);
+
   function patchSettings(next: Partial<ParentSettingsState>) {
     onChange({ ...settings, ...next });
+  }
+
+  async function addToHomeScreen() {
+    if (installPrompt) {
+      installPrompt.prompt();
+      await installPrompt.userChoice.catch(() => undefined);
+      setInstallPrompt(null);
+      return;
+    }
+
+    setShowInstallGuide((value) => !value);
   }
 
   return (
@@ -117,9 +143,35 @@ export function ParentSettings({ settings, onChange, onReset, onBack }: Props) {
             <small>Clear All Settings</small>
           </span>
         </button>
+
+        <section className="install-card">
+          <div className="install-icon-preview" aria-hidden="true">
+            <img src={assetPath("icon-192.svg")} alt="" />
+          </div>
+          <div className="install-copy">
+            <strong>添加到桌面</strong>
+            <small>Add to Home Screen</small>
+          </div>
+          <button className="install-action" onClick={addToHomeScreen}>
+            安装 / Add
+          </button>
+        </section>
+
+        {showInstallGuide && (
+          <section className="install-guide" aria-label="添加到桌面说明 / Add to Home Screen guide">
+            <div>
+              <strong>iPhone / iPad</strong>
+              <p>用 Safari 打开应用，点底部分享按钮，再选择“添加到主屏幕”。</p>
+            </div>
+            <div>
+              <strong>Android</strong>
+              <p>用 Chrome 或微信内置浏览器打开应用，点菜单，再选择“添加到主屏幕”或“安装应用”。</p>
+            </div>
+          </section>
+        )}
       </div>
 
-      <img className="settings-bear" src="/assets/characters/bear.png" alt="" />
+      <img className="settings-bear" src={assetPath("assets/characters/bear.png")} alt="" />
 
       <footer className="settings-footer">
         <p>© 2026 小耳朵故事机 Little Ears StoryBox. All rights reserved.</p>

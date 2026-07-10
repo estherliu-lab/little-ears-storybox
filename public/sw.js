@@ -1,10 +1,12 @@
-const CACHE_NAME = "little-ears-storybox-v2";
+const CACHE_NAME = "little-ears-storybox-v3";
+const SCOPE_PATH = new URL(self.registration.scope).pathname.replace(/\/$/, "");
+const scopedPath = (path) => `${SCOPE_PATH}${path}`;
 const CORE_ASSETS = [
-  "/",
-  "/index.html",
-  "/manifest.webmanifest",
-  "/icon-192.svg",
-  "/icon-512.svg"
+  scopedPath("/"),
+  scopedPath("/index.html"),
+  scopedPath("/manifest.webmanifest"),
+  scopedPath("/icon-192.svg"),
+  scopedPath("/icon-512.svg")
 ];
 
 self.addEventListener("install", (event) => {
@@ -36,7 +38,7 @@ self.addEventListener("fetch", (event) => {
         return response;
       })
       .catch(() =>
-        caches.match(event.request).then((cached) => cached || caches.match("/index.html"))
+        caches.match(event.request).then((cached) => cached || caches.match(scopedPath("/index.html")))
       )
   );
 });

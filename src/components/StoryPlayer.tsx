@@ -9,6 +9,7 @@ import {
   type StoryMode,
 } from "../data/stories";
 import { useSpeech } from "../hooks/useSpeech";
+import { assetPath } from "../utils/assets";
 import { LanguageToggle } from "./LanguageToggle";
 import type { CSSProperties } from "react";
 
@@ -322,7 +323,12 @@ export function StoryPlayer({
   if (finished) {
     return (
       <section className="completion-screen page-shell">
-        <div className="completion-card" role="img" aria-label="你的小耳朵听完啦！Your little ears finished the story!" />
+        <div
+          className="completion-card"
+          role="img"
+          aria-label="你的小耳朵听完啦！Your little ears finished the story!"
+          style={{ backgroundImage: `url(${assetPath("assets/references/finish-reference.png")})` }}
+        />
 
         <div className="completion-actions">
           <button className="completion-action blue" onClick={() => playStory(0)}>

@@ -21,7 +21,7 @@ if ("serviceWorker" in navigator) {
       return;
     }
 
-    navigator.serviceWorker.register("/sw.js").catch(() => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
       // The app still works online if service worker registration is unavailable.
     });
   });
