@@ -1,4 +1,4 @@
-const CACHE_NAME = "little-ears-storybox-v3";
+const CACHE_NAME = "little-ears-storybox-v5";
 const SCOPE_PATH = new URL(self.registration.scope).pathname.replace(/\/$/, "");
 const scopedPath = (path) => `${SCOPE_PATH}${path}`;
 const CORE_ASSETS = [
@@ -29,12 +29,26 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+
+  if (
+    event.request.headers.has("range") ||
+    event.request.destination === "audio" ||
+    url.pathname.endsWith(".mp3")
+  ) {
+    return;
+  }
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
+        if (!response.ok || response.type !== "basic") {
+          return response;
+        }
         const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {
+          // Some browser responses are not cacheable; network playback should continue.
+        });
         return response;
       })
       .catch(() =>
