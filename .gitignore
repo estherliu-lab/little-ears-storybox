@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+dev-server*.log
+*.local
+
+previews/
+previews-*/
+previews-*.png
+
+.DS_Store
+Thumbs.db
