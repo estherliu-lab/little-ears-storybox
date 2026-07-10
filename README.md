@@ -4,12 +4,12 @@
 
 适合 0-5 岁宝宝的中英文温柔故事应用，包含毛绒风角色、中文/英文配音朗读、睡前模式、分享功能和家长友好的设置页。
 
-[打开应用](https://estherliu-lab.github.io/little-ears-storybox/) | [GitHub 仓库](https://github.com/estherliu-lab/little-ears-storybox)
+[打开应用](https://estherliu-lab.github.io/little-ears-storybox/docs/app/) | [GitHub 仓库](https://github.com/estherliu-lab/little-ears-storybox)
 
 **扫码打开小耳朵故事机**
 
 <p align="left">
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&data=https%3A%2F%2Festherliu-lab.github.io%2Flittle-ears-storybox%2F" width="132" height="132" alt="小耳朵故事机二维码">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&data=https%3A%2F%2Festherliu-lab.github.io%2Flittle-ears-storybox%2Fdocs%2Fapp%2F" width="132" height="132" alt="小耳朵故事机二维码">
 </p>
 
 小耳朵故事机适合亲子共听、睡前陪伴、吃饭鼓励、勇敢尝试和需要抱抱的温柔时刻。宝宝可以选择喜欢的小动物角色，切换中文或英文，听一段短短的暖心故事。
