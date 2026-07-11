@@ -70,6 +70,7 @@ export function StoryPlayer({
   const storyDuration = durationSeconds || story.durationSeconds;
   const isPlaying = audioPlaying || isSpeaking;
   const isPlaybackPaused = audioPaused || isPaused;
+  const hasRecordedAudio = Boolean(story.audio[language]);
 
   function storyTextFromProgress(ratio: number) {
     const text = story.text[language];
@@ -427,7 +428,7 @@ export function StoryPlayer({
           <span>00:{String(Math.round(storyDuration)).padStart(2, "0")}</span>
         </div>
 
-        {!isSupported && (
+        {!hasRecordedAudio && !isSupported && (
           <p className="speech-warning">
             当前浏览器不支持朗读，可以换 Chrome / Safari 再试。
             <br />

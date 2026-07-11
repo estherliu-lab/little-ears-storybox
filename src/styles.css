@@ -29,6 +29,14 @@ select {
 button {
   border: 0;
   cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 187, 65, 0.18);
+}
+
+input,
+label {
+  touch-action: manipulation;
 }
 
 .app {
@@ -2344,6 +2352,7 @@ p {
     margin: 8px auto 18px;
     padding: 17px 14px 18px;
     border-radius: 32px;
+    z-index: 5;
   }
 
   .story-progress {
@@ -2371,6 +2380,8 @@ p {
   .player-actions {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    position: relative;
+    z-index: 8;
   }
 
   .round-control,
@@ -2380,6 +2391,15 @@ p {
     gap: 3px;
     font-size: 0.82rem;
     line-height: 1.12;
+    position: relative;
+    z-index: 2;
+  }
+
+  .round-control:active,
+  .completion-action:active,
+  .settings-segmented button:active,
+  .share-option:active {
+    transform: scale(0.97);
   }
 
   .round-control span {
@@ -2627,22 +2647,29 @@ p {
 
   .settings-footer {
     margin: auto 0 0;
-    padding: 0 88px 0 30px;
-    font-size: 0.58rem;
-    line-height: 1.2;
+    padding: 0 70px 0 8px;
+    font-size: 0.55rem;
+    line-height: 1.24;
     text-align: center;
+    color: rgba(91, 50, 16, 0.78);
   }
 
   .settings-footer p {
-    margin: 1px 0;
+    margin: 1px auto;
+    max-width: 310px;
+  }
+
+  .settings-footer .footer-brand {
+    font-weight: 950;
+    color: rgba(91, 50, 16, 0.88);
   }
 
   .settings-bear {
     display: block;
     top: auto;
-    right: 16px;
-    bottom: 18px;
-    width: 72px;
+    right: 12px;
+    bottom: 20px;
+    width: 58px;
     border: 3px solid rgba(255, 248, 232, 0.92);
     box-shadow: 0 10px 18px rgba(93, 59, 22, 0.16);
     z-index: 3;
