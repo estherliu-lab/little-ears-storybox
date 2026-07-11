@@ -34,14 +34,15 @@ export const characters: Record<
     emoji: string;
     color: string;
     image: string;
+    thumb: string;
   }
 > = {
-  lamb: { zh: "小羊", en: "Little Lamb", emoji: "🐑", color: "#c9c0f2", image: assetPath("assets/optimized/characters/lamb.jpg") },
-  bunny: { zh: "小兔", en: "Little Bunny", emoji: "🐰", color: "#f5a9a9", image: assetPath("assets/optimized/characters/bunny.jpg") },
-  cat: { zh: "小猫", en: "Little Cat", emoji: "🐱", color: "#c9a7e8", image: assetPath("assets/optimized/characters/cat.jpg") },
-  dog: { zh: "小狗", en: "Little Puppy", emoji: "🐶", color: "#f6d28b", image: assetPath("assets/optimized/characters/dog.jpg") },
-  bear: { zh: "小熊", en: "Little Bear", emoji: "🐻", color: "#cfe1ba", image: assetPath("assets/optimized/characters/bear.jpg") },
-  duck: { zh: "小鸭", en: "Little Duck", emoji: "🐥", color: "#a8d7e8", image: assetPath("assets/optimized/characters/duck.jpg") },
+  lamb: { zh: "小羊", en: "Little Lamb", emoji: "🐑", color: "#c9c0f2", image: assetPath("assets/optimized/characters/lamb.jpg"), thumb: assetPath("assets/optimized/thumbs/lamb.jpg") },
+  bunny: { zh: "小兔", en: "Little Bunny", emoji: "🐰", color: "#f5a9a9", image: assetPath("assets/optimized/characters/bunny.jpg"), thumb: assetPath("assets/optimized/thumbs/bunny.jpg") },
+  cat: { zh: "小猫", en: "Little Cat", emoji: "🐱", color: "#c9a7e8", image: assetPath("assets/optimized/characters/cat.jpg"), thumb: assetPath("assets/optimized/thumbs/cat.jpg") },
+  dog: { zh: "小狗", en: "Little Puppy", emoji: "🐶", color: "#f6d28b", image: assetPath("assets/optimized/characters/dog.jpg"), thumb: assetPath("assets/optimized/thumbs/dog.jpg") },
+  bear: { zh: "小熊", en: "Little Bear", emoji: "🐻", color: "#cfe1ba", image: assetPath("assets/optimized/characters/bear.jpg"), thumb: assetPath("assets/optimized/thumbs/bear.jpg") },
+  duck: { zh: "小鸭", en: "Little Duck", emoji: "🐥", color: "#a8d7e8", image: assetPath("assets/optimized/characters/duck.jpg"), thumb: assetPath("assets/optimized/thumbs/duck.jpg") },
 };
 
 export const modeLabels: Record<StoryMode | "all", { zh: string; en: string; icon: string }> = {

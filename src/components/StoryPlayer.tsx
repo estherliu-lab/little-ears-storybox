@@ -53,6 +53,8 @@ export function StoryPlayer({
   useEffect(() => {
     stopStory();
     setFinished(false);
+    setSharePanelOpen(false);
+    setShareStatus("");
   }, [language, story.id]);
 
   useEffect(() => {
@@ -104,6 +106,7 @@ export function StoryPlayer({
     stop();
     clearAudio(false);
     setFinished(false);
+    setSharePanelOpen(false);
     setProgress(safeRatio);
     setCurrentSeconds(Math.floor(safeRatio * storyDuration));
 
@@ -131,6 +134,8 @@ export function StoryPlayer({
         setCurrentSeconds(durationSeconds || story.durationSeconds);
         setAudioPlaying(false);
         setAudioPaused(false);
+        setSharePanelOpen(false);
+        setShareStatus("");
         setFinished(true);
       };
       audio.onerror = () => {
@@ -139,6 +144,8 @@ export function StoryPlayer({
           rate: speechRate,
           onEnd: () => {
             setProgress(1);
+            setSharePanelOpen(false);
+            setShareStatus("");
             setFinished(true);
           },
         });
@@ -155,6 +162,8 @@ export function StoryPlayer({
             rate: speechRate,
             onEnd: () => {
               setProgress(1);
+              setSharePanelOpen(false);
+              setShareStatus("");
               setFinished(true);
             },
           });
@@ -166,6 +175,8 @@ export function StoryPlayer({
       rate: speechRate,
       onEnd: () => {
         setProgress(1);
+        setSharePanelOpen(false);
+        setShareStatus("");
         setFinished(true);
       },
     });
@@ -291,22 +302,22 @@ export function StoryPlayer({
     return (
       <div className="share-panel" role="dialog" aria-label="分享故事 / Share story">
         <button className="share-option wechat" onClick={() => shareStory("wechat")}>
-          <span>微</span>
+          <span className="share-icon wechat-icon" aria-hidden="true" />
           <strong>微信聊天</strong>
           <small>WeChat Chat</small>
         </button>
         <button className="share-option moments" onClick={() => shareStory("moments")}>
-          <span>朋</span>
+          <span className="share-icon moments-icon" aria-hidden="true" />
           <strong>朋友圈</strong>
           <small>Moments</small>
         </button>
         <button className="share-option" onClick={() => shareStory("system")}>
-          <span>↗</span>
+          <span className="share-icon system-icon" aria-hidden="true" />
           <strong>系统分享</strong>
           <small>System Share</small>
         </button>
         <button className="share-option copy" onClick={() => shareStory("copy")}>
-          <span>⧉</span>
+          <span className="share-icon copy-icon" aria-hidden="true" />
           <strong>复制链接</strong>
           <small>Copy Link</small>
         </button>
@@ -327,7 +338,7 @@ export function StoryPlayer({
           className="completion-card"
           role="img"
           aria-label="你的小耳朵听完啦！Your little ears finished the story!"
-          style={{ backgroundImage: `url(${assetPath("assets/optimized/references/finish-reference.jpg")})` }}
+          style={{ backgroundImage: `url(${assetPath("assets/optimized/references/completion-card.jpg")})` }}
         />
 
         <div className="completion-actions">

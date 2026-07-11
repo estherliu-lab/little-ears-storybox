@@ -1,4 +1,4 @@
-const ASSET_VERSION = "20260710-fast-images";
+const ASSET_VERSION = "20260710-tiny-mobile";
 
 export function assetPath(path: string) {
   const cleanPath = path.replace(/^\/+/, "");

@@ -1395,6 +1395,11 @@ p {
   opacity: 0.72;
 }
 
+.story-player + .settings-entry,
+.completion-screen + .settings-entry {
+  display: none;
+}
+
 .settings-page {
   width: min(1088px, 100%);
   min-height: calc(100vh - 52px);
@@ -1888,6 +1893,95 @@ p {
   font-size: 1.6rem;
 }
 
+.share-icon {
+  position: relative;
+  overflow: hidden;
+}
+
+.share-icon::before,
+.share-icon::after {
+  content: "";
+  position: absolute;
+}
+
+.wechat-icon::before {
+  width: 25px;
+  height: 18px;
+  left: 9px;
+  top: 12px;
+  border-radius: 999px;
+  background: #fff8e9;
+  box-shadow: 8px 7px 0 -2px rgba(255, 248, 233, 0.86);
+}
+
+.wechat-icon::after {
+  width: 7px;
+  height: 7px;
+  left: 15px;
+  top: 17px;
+  border-radius: 50%;
+  background: #33a94f;
+  box-shadow: 10px 0 0 #33a94f;
+}
+
+.moments-icon::before {
+  width: 27px;
+  height: 27px;
+  left: 10px;
+  top: 10px;
+  border-radius: 50%;
+  border: 4px solid #fff8e9;
+  box-shadow: 0 0 0 6px rgba(255, 248, 233, 0.28);
+}
+
+.moments-icon::after {
+  width: 6px;
+  height: 6px;
+  left: 21px;
+  top: 21px;
+  border-radius: 50%;
+  background: #fff8e9;
+}
+
+.system-icon::before {
+  width: 22px;
+  height: 22px;
+  right: 12px;
+  top: 11px;
+  border-top: 5px solid #fff8e9;
+  border-right: 5px solid #fff8e9;
+  transform: rotate(0deg);
+}
+
+.system-icon::after {
+  width: 24px;
+  height: 5px;
+  left: 12px;
+  bottom: 16px;
+  border-radius: 999px;
+  background: #fff8e9;
+  transform: rotate(-42deg);
+  transform-origin: right center;
+}
+
+.copy-icon::before {
+  width: 20px;
+  height: 24px;
+  left: 16px;
+  top: 10px;
+  border: 4px solid #fff8e9;
+  border-radius: 7px;
+}
+
+.copy-icon::after {
+  width: 18px;
+  height: 22px;
+  left: 10px;
+  top: 16px;
+  border: 4px solid rgba(255, 248, 233, 0.78);
+  border-radius: 7px;
+}
+
 .share-option strong {
   font-size: 1.05rem;
 }
@@ -1912,15 +2006,11 @@ p {
 
 @media (max-width: 880px) {
   .settings-page {
-    padding-bottom: 170px;
+    padding-bottom: 34px;
   }
 
   .settings-bear {
-    display: block;
-    right: 24px;
-    bottom: 68px;
-    width: 128px;
-    border-radius: 30px;
+    display: none;
   }
 
   .player-actions {
@@ -1949,6 +2039,25 @@ p {
 
   .share-option {
     min-height: 98px;
+  }
+
+  .share-option span {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  .completion-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .completion-action small {
+    display: none;
+  }
+
+  .completion-action {
+    min-height: 94px;
+    gap: 4px;
   }
 }
 
