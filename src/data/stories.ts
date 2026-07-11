@@ -36,12 +36,12 @@ export const characters: Record<
     image: string;
   }
 > = {
-  lamb: { zh: "小羊", en: "Little Lamb", emoji: "🐑", color: "#c9c0f2", image: assetPath("assets/characters/lamb.png") },
-  bunny: { zh: "小兔", en: "Little Bunny", emoji: "🐰", color: "#f5a9a9", image: assetPath("assets/characters/bunny.png") },
-  cat: { zh: "小猫", en: "Little Cat", emoji: "🐱", color: "#c9a7e8", image: assetPath("assets/characters/cat.png") },
-  dog: { zh: "小狗", en: "Little Puppy", emoji: "🐶", color: "#f6d28b", image: assetPath("assets/characters/dog.png") },
-  bear: { zh: "小熊", en: "Little Bear", emoji: "🐻", color: "#cfe1ba", image: assetPath("assets/characters/bear.png") },
-  duck: { zh: "小鸭", en: "Little Duck", emoji: "🐥", color: "#a8d7e8", image: assetPath("assets/characters/duck.png") },
+  lamb: { zh: "小羊", en: "Little Lamb", emoji: "🐑", color: "#c9c0f2", image: assetPath("assets/optimized/characters/lamb.jpg") },
+  bunny: { zh: "小兔", en: "Little Bunny", emoji: "🐰", color: "#f5a9a9", image: assetPath("assets/optimized/characters/bunny.jpg") },
+  cat: { zh: "小猫", en: "Little Cat", emoji: "🐱", color: "#c9a7e8", image: assetPath("assets/optimized/characters/cat.jpg") },
+  dog: { zh: "小狗", en: "Little Puppy", emoji: "🐶", color: "#f6d28b", image: assetPath("assets/optimized/characters/dog.jpg") },
+  bear: { zh: "小熊", en: "Little Bear", emoji: "🐻", color: "#cfe1ba", image: assetPath("assets/optimized/characters/bear.jpg") },
+  duck: { zh: "小鸭", en: "Little Duck", emoji: "🐥", color: "#a8d7e8", image: assetPath("assets/optimized/characters/duck.jpg") },
 };
 
 export const modeLabels: Record<StoryMode | "all", { zh: string; en: string; icon: string }> = {

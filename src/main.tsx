@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles.css";
 
-const RELEASE_CACHE_KEY = "little-ears-release-20260710-media-fix";
-const RELOAD_SESSION_KEY = "little-ears-media-fix-reloaded";
+const RELEASE_CACHE_KEY = "little-ears-release-20260710-fast-images";
+const RELOAD_SESSION_KEY = "little-ears-fast-images-reloaded";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -327,7 +327,7 @@ export function StoryPlayer({
           className="completion-card"
           role="img"
           aria-label="你的小耳朵听完啦！Your little ears finished the story!"
-          style={{ backgroundImage: `url(${assetPath("assets/references/finish-reference.png")})` }}
+          style={{ backgroundImage: `url(${assetPath("assets/optimized/references/finish-reference.jpg")})` }}
         />
 
         <div className="completion-actions">
@@ -373,7 +373,7 @@ export function StoryPlayer({
 
       <div className="player-scene">
         <div className="animal-stage" style={{ "--card-color": character.color } as CSSProperties}>
-          <img src={character.image} alt={character[language]} />
+          <img src={character.image} alt={character[language]} loading="eager" decoding="async" />
           <span className="sparkle s1">✦</span>
           <span className="sparkle s2">✧</span>
           <span className="sparkle s3">✦</span>

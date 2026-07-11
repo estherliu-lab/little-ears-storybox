@@ -20,7 +20,13 @@ export function HomeScreen({ language, onLanguageChange, onStart }: Props) {
       </div>
 
       <div className="storybox-hero" aria-label="Cute story machine illustration">
-        <img src={assetPath("assets/references/home-reference.png")} alt="" />
+        <img
+          src={assetPath("assets/optimized/references/home-reference.jpg")}
+          alt=""
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
         <div className="star star-a">✦</div>
         <div className="star star-b">✧</div>
         <div className="star star-c">✦</div>

@@ -171,7 +171,7 @@ export function ParentSettings({ settings, onChange, onReset, onBack }: Props) {
         )}
       </div>
 
-      <img className="settings-bear" src={assetPath("assets/characters/bear.png")} alt="" />
+      <img className="settings-bear" src={assetPath("assets/optimized/characters/bear.jpg")} alt="" loading="lazy" decoding="async" />
 
       <footer className="settings-footer">
         <p>© 2026 小耳朵故事机 Little Ears StoryBox. All rights reserved.</p>

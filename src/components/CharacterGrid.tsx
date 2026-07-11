@@ -47,7 +47,7 @@ export function CharacterGrid({ language, activeMode, onModeChange, onSelect }: 
               style={{ "--card-color": character.color } as CSSProperties}
             >
               <span className="animal-photo">
-                <img src={character.image} alt={character[language]} />
+                <img src={character.image} alt={character[language]} loading="eager" decoding="async" />
               </span>
               <span className="character-nameplate">
                 <strong>{character.zh}</strong>
