@@ -1,17 +1,12 @@
-import type { Language } from "../data/stories";
 import { assetPath } from "../utils/assets";
-import { LanguageToggle } from "./LanguageToggle";
 
 type Props = {
-  language: Language;
-  onLanguageChange: (language: Language) => void;
   onStart: () => void;
 };
 
-export function HomeScreen({ language, onLanguageChange, onStart }: Props) {
+export function HomeScreen({ onStart }: Props) {
   return (
     <section className="home-screen page-shell">
-      <LanguageToggle language={language} onChange={onLanguageChange} />
       <div className="cloud cloud-one" />
       <div className="cloud cloud-two" />
       <div className="home-copy">

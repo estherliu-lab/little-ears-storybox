@@ -78,10 +78,10 @@ export default function App() {
 
     const oscillator = context.createOscillator();
     const noteGain = context.createGain();
-    oscillator.type = "triangle";
+    oscillator.type = "sine";
     oscillator.frequency.setValueAtTime(frequency, startTime);
     noteGain.gain.setValueAtTime(0.0001, startTime);
-    noteGain.gain.exponentialRampToValueAtTime(volume, startTime + 0.14);
+    noteGain.gain.exponentialRampToValueAtTime(volume, startTime + 0.12);
     noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
     oscillator.connect(noteGain);
     noteGain.connect(masterGain);
@@ -111,16 +111,18 @@ export default function App() {
     const startTime = context.currentTime + 0.04;
 
     phrase.notes.forEach((frequency, index) => {
-      playLullabyNote(context, frequency, startTime + index * 0.035, phrase.length * 0.94, index === 0 ? 0.05 : 0.026);
+      playLullabyNote(context, frequency, startTime + index * 0.035, phrase.length * 0.94, index === 0 ? 0.11 : 0.052);
     });
+    playLullabyNote(context, phrase.notes[0] / 2, startTime + 0.02, phrase.length * 0.98, 0.04);
 
     musicTimerRef.current = window.setTimeout(() => scheduleLullaby(context, step + 1), phrase.length * 1000);
   }
 
   function startMusic() {
     if (audioRef.current) {
-      audioRef.current.resume().catch(() => undefined);
-      if (!musicTimerRef.current) scheduleLullaby(audioRef.current);
+      audioRef.current.resume().then(() => {
+        if (!musicTimerRef.current && audioRef.current) scheduleLullaby(audioRef.current);
+      }).catch(() => undefined);
       return;
     }
 
@@ -128,13 +130,12 @@ export default function App() {
     if (!AudioContextClass) return;
     const context = new AudioContextClass();
     const masterGain = context.createGain();
-    masterGain.gain.value = 0.18;
+    masterGain.gain.value = 0.32;
     masterGain.connect(context.destination);
 
     audioRef.current = context;
     musicMasterGainRef.current = masterGain;
-    context.resume().catch(() => undefined);
-    scheduleLullaby(context);
+    context.resume().then(() => scheduleLullaby(context)).catch(() => scheduleLullaby(context));
   }
 
   useEffect(() => {
@@ -175,8 +176,6 @@ export default function App() {
     <main className={`app ${settings.bedtimeMode ? "bedtime" : ""}`}>
       {screen === "home" && (
         <HomeScreen
-          language={language}
-          onLanguageChange={setLanguage}
           onStart={() => setScreen("characters")}
         />
       )}

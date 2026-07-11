@@ -448,7 +448,7 @@ export function StoryPlayer({
           </button>
           <button className="round-control" onClick={changeStory}>
             <span>▶▶</span>
-            换一个故事
+            换故事
             <small>Next Story</small>
           </button>
           <button className="round-control share-control" onClick={toggleSharePanel}>

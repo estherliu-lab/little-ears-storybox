@@ -9,12 +9,12 @@ export function LanguageToggle({ language, onChange }: Props) {
   return (
     <div className="language-toggle" aria-label="Reading language toggle">
       <button className={language === "zh" ? "active" : ""} onClick={() => onChange("zh")}>
-        <strong>中文</strong>
-        <small>Read CN</small>
+        <strong>中文朗读</strong>
+        <small>Chinese</small>
       </button>
       <button className={language === "en" ? "active" : ""} onClick={() => onChange("en")}>
-        <strong>English</strong>
-        <small>英文朗读</small>
+        <strong>English 朗读</strong>
+        <small>English</small>
       </button>
     </div>
   );
