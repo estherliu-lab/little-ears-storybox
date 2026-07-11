@@ -37,8 +37,9 @@ export default function App() {
   );
   const [selectedCharacter, setSelectedCharacter] = useState<CharacterId>("lamb");
   const audioRef = useRef<AudioContext | null>(null);
-  const oscillatorRef = useRef<OscillatorNode | null>(null);
-  const gainRef = useRef<GainNode | null>(null);
+  const musicTimerRef = useRef<number | null>(null);
+  const musicMasterGainRef = useRef<GainNode | null>(null);
+  const musicOscillatorsRef = useRef<Set<OscillatorNode>>(new Set());
 
   const speechRate = useMemo(() => (settings.speechRate === "slow" ? 0.78 : 0.92), [settings.speechRate]);
 
@@ -52,44 +53,88 @@ export default function App() {
   }, [settings.defaultLanguage, settings.bedtimeMode]);
 
   function stopMusic() {
-    oscillatorRef.current?.stop();
-    oscillatorRef.current = null;
-    gainRef.current = null;
-    audioRef.current?.close();
+    if (musicTimerRef.current) {
+      window.clearTimeout(musicTimerRef.current);
+      musicTimerRef.current = null;
+    }
+
+    musicOscillatorsRef.current.forEach((oscillator) => {
+      try {
+        oscillator.stop();
+      } catch {
+        // The oscillator may have already completed its envelope.
+      }
+    });
+    musicOscillatorsRef.current.clear();
+    musicMasterGainRef.current?.disconnect();
+    musicMasterGainRef.current = null;
+    audioRef.current?.close().catch(() => undefined);
     audioRef.current = null;
+  }
+
+  function playLullabyNote(context: AudioContext, frequency: number, startTime: number, duration: number, volume: number) {
+    const masterGain = musicMasterGainRef.current;
+    if (!masterGain) return;
+
+    const oscillator = context.createOscillator();
+    const noteGain = context.createGain();
+    oscillator.type = "triangle";
+    oscillator.frequency.setValueAtTime(frequency, startTime);
+    noteGain.gain.setValueAtTime(0.0001, startTime);
+    noteGain.gain.exponentialRampToValueAtTime(volume, startTime + 0.14);
+    noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+    oscillator.connect(noteGain);
+    noteGain.connect(masterGain);
+    oscillator.start(startTime);
+    oscillator.stop(startTime + duration + 0.05);
+    musicOscillatorsRef.current.add(oscillator);
+    oscillator.onended = () => {
+      musicOscillatorsRef.current.delete(oscillator);
+      noteGain.disconnect();
+    };
+  }
+
+  function scheduleLullaby(context: AudioContext, step = 0) {
+    if (audioRef.current !== context || !musicMasterGainRef.current) return;
+
+    const melody = [
+      { notes: [392, 523], length: 1.25 },
+      { notes: [440], length: 1 },
+      { notes: [392, 494], length: 1.25 },
+      { notes: [330], length: 1.4 },
+      { notes: [349, 440], length: 1.15 },
+      { notes: [392], length: 1 },
+      { notes: [330, 392], length: 1.25 },
+      { notes: [294], length: 1.7 },
+    ];
+    const phrase = melody[step % melody.length];
+    const startTime = context.currentTime + 0.04;
+
+    phrase.notes.forEach((frequency, index) => {
+      playLullabyNote(context, frequency, startTime + index * 0.035, phrase.length * 0.94, index === 0 ? 0.05 : 0.026);
+    });
+
+    musicTimerRef.current = window.setTimeout(() => scheduleLullaby(context, step + 1), phrase.length * 1000);
   }
 
   function startMusic() {
     if (audioRef.current) {
-      audioRef.current.resume();
+      audioRef.current.resume().catch(() => undefined);
+      if (!musicTimerRef.current) scheduleLullaby(audioRef.current);
       return;
     }
 
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     const context = new AudioContextClass();
-    const oscillator = context.createOscillator();
-    const tremolo = context.createOscillator();
-    const tremoloGain = context.createGain();
-    const gain = context.createGain();
-
-    oscillator.type = "sine";
-    oscillator.frequency.value = 196;
-    tremolo.type = "sine";
-    tremolo.frequency.value = 0.18;
-    tremoloGain.gain.value = 0.018;
-    gain.gain.value = 0.028;
-
-    tremolo.connect(tremoloGain);
-    tremoloGain.connect(gain.gain);
-    oscillator.connect(gain);
-    gain.connect(context.destination);
-    oscillator.start();
-    tremolo.start();
+    const masterGain = context.createGain();
+    masterGain.gain.value = 0.18;
+    masterGain.connect(context.destination);
 
     audioRef.current = context;
-    oscillatorRef.current = oscillator;
-    gainRef.current = gain;
+    musicMasterGainRef.current = masterGain;
+    context.resume().catch(() => undefined);
+    scheduleLullaby(context);
   }
 
   useEffect(() => {

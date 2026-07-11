@@ -233,10 +233,17 @@ export function StoryPlayer({
     }
   }
 
+  function getShareUrl() {
+    return new URL(import.meta.env.BASE_URL, window.location.origin).href;
+  }
+
+  function isWechatBrowser() {
+    return /MicroMessenger/i.test(window.navigator.userAgent);
+  }
+
   async function copyShareText(extraText = "") {
-    const shareTitle = "小耳朵故事机 Little Ears StoryBox";
     const shareText = `我刚听完《${story.title.zh} / ${story.title.en}》，一起来听温柔小故事吧。`;
-    const shareUrl = window.location.origin;
+    const shareUrl = getShareUrl();
     const fullText = `${shareText}${extraText ? `\n${extraText}` : ""}\n${shareUrl}`;
 
     try {
@@ -250,9 +257,30 @@ export function StoryPlayer({
   async function shareStory(target: "system" | "wechat" | "moments" | "copy" = "system") {
     const shareTitle = "小耳朵故事机 Little Ears StoryBox";
     const shareText = `我刚听完《${story.title.zh} / ${story.title.en}》，一起来听温柔小故事吧。`;
-    const shareUrl = window.location.origin;
+    const shareUrl = getShareUrl();
 
     try {
+      if (target === "wechat" || target === "moments") {
+        const copied = await copyShareText(target === "moments" ? "朋友圈文案已准备好。" : "");
+        if (isWechatBrowser()) {
+          setShareStatus(
+            target === "moments"
+              ? "已复制文案，请点微信右上角菜单分享到朋友圈"
+              : "已复制文案，请点微信右上角菜单分享给朋友"
+          );
+        } else {
+          setShareStatus(
+            copied
+              ? target === "moments"
+                ? "已复制，打开微信朋友圈粘贴发布"
+                : "已复制，打开微信聊天粘贴发送"
+              : "请手动复制链接后在微信里分享"
+          );
+        }
+        setSharePanelOpen(false);
+        return;
+      }
+
       if (target === "system" && navigator.share) {
         await navigator.share({
           title: shareTitle,
@@ -264,25 +292,8 @@ export function StoryPlayer({
         return;
       }
 
-      if ((target === "wechat" || target === "moments") && navigator.share) {
-        await navigator.share({
-          title: shareTitle,
-          text: target === "moments" ? `${shareText} 分享到朋友圈～` : shareText,
-          url: shareUrl,
-        });
-        setShareStatus(target === "moments" ? "已打开分享，可选择微信朋友圈" : "已打开分享，可选择微信聊天");
-        setSharePanelOpen(false);
-        return;
-      }
-
-      const copied = await copyShareText(target === "moments" ? "分享到朋友圈文案已准备好。" : "");
-      if (target === "wechat") {
-        setShareStatus(copied ? "已复制，打开微信聊天粘贴发送" : "请手动复制链接后发到微信聊天");
-      } else if (target === "moments") {
-        setShareStatus(copied ? "已复制，打开微信朋友圈粘贴发布" : "请手动复制链接后发到朋友圈");
-      } else {
-        setShareStatus(copied ? "链接已复制 / Link copied" : "请手动复制当前页面链接");
-      }
+      const copied = await copyShareText();
+      setShareStatus(copied ? "链接已复制 / Link copied" : "请手动复制当前页面链接");
       setSharePanelOpen(false);
     } catch {
       const copied = await copyShareText();

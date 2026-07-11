@@ -1,4 +1,4 @@
-const CACHE_NAME = "little-ears-storybox-v8";
+const CACHE_NAME = "little-ears-storybox-v9";
 const SCOPE_PATH = new URL(self.registration.scope).pathname.replace(/\/$/, "");
 const scopedPath = (path) => `${SCOPE_PATH}${path}`;
 const CORE_ASSETS = [
