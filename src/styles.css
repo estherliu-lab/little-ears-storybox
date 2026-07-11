@@ -336,15 +336,20 @@ p {
 
 .animal-photo {
   position: absolute;
-  inset: 0 0 88px;
+  inset: 10px 10px 92px;
   overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 74%, rgba(255, 255, 255, 0.3), transparent 36%),
+    color-mix(in srgb, var(--card-color) 78%, #fff 22%);
 }
 
 .animal-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 43%;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 8px 12px 0;
 }
 
 .character-nameplate {
@@ -443,15 +448,18 @@ p {
   border-radius: 46px;
   position: relative;
   overflow: hidden;
-  background: var(--card-color);
+  background:
+    radial-gradient(circle at 50% 78%, rgba(255, 255, 255, 0.28), transparent 36%),
+    var(--card-color);
   box-shadow: 0 22px 62px rgba(0, 0, 0, 0.28);
 }
 
 .animal-stage img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 43%;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 18px 18px 0;
   animation: gentleSway 5s ease-in-out infinite;
 }
 
@@ -682,8 +690,10 @@ p {
   max-height: clamp(260px, 58vh, 790px);
   aspect-ratio: 1.08;
   border-radius: 44px;
-  background-size: cover;
-  background-position: center top;
+  background-color: rgba(37, 31, 58, 0.82);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36), inset 0 0 0 1px rgba(255, 255, 255, 0.24);
 }
 
@@ -1246,7 +1256,36 @@ p {
   }
 
   .character-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .character-card {
+    min-height: 238px;
+    border-radius: 28px;
+  }
+
+  .animal-photo {
+    inset: 8px 8px 82px;
+    border-radius: 22px;
+  }
+
+  .animal-photo img {
+    padding: 6px 8px 0;
+  }
+
+  .character-nameplate {
+    min-height: 94px;
+    padding: 12px 8px 14px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .character-nameplate strong {
+    font-size: 1.45rem;
+  }
+
+  .character-nameplate small {
+    font-size: 0.9rem;
   }
 
   .player-topbar {
@@ -1685,11 +1724,24 @@ p {
 
 @media (max-width: 540px) {
   .settings-entry {
-    right: 14px;
-    bottom: 14px;
-    min-width: 112px;
-    height: 62px;
-    padding: 7px 14px;
+    right: 10px;
+    bottom: 10px;
+    min-width: 92px;
+    height: 54px;
+    padding: 6px 10px;
+    column-gap: 7px;
+  }
+
+  .settings-entry span {
+    font-size: 1.25rem;
+  }
+
+  .settings-entry strong {
+    font-size: 0.84rem;
+  }
+
+  .settings-entry small {
+    font-size: 0.62rem;
   }
 
   .settings-back {
