@@ -41,6 +41,7 @@ export function StoryPlayer({
   const [audioPaused, setAudioPaused] = useState(false);
   const [currentSeconds, setCurrentSeconds] = useState(0);
   const [durationSeconds, setDurationSeconds] = useState(0);
+  const skipNextLanguageResetRef = useRef(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { speak, pause, resume, stop, isSpeaking, isPaused, isSupported } = useSpeech();
   const character = characters[characterId];
@@ -51,6 +52,10 @@ export function StoryPlayer({
   );
 
   useEffect(() => {
+    if (skipNextLanguageResetRef.current) {
+      skipNextLanguageResetRef.current = false;
+      return;
+    }
     stopStory();
     setFinished(false);
     setSharePanelOpen(false);
@@ -72,8 +77,8 @@ export function StoryPlayer({
   const isPlaybackPaused = audioPaused || isPaused;
   const hasRecordedAudio = Boolean(story.audio[language]);
 
-  function storyTextFromProgress(ratio: number) {
-    const text = story.text[language];
+  function storyTextFromProgress(ratio: number, targetLanguage = language) {
+    const text = story.text[targetLanguage];
     const startIndex = Math.min(text.length - 1, Math.max(0, Math.floor(text.length * ratio)));
     return text.slice(startIndex);
   }
@@ -100,9 +105,9 @@ export function StoryPlayer({
     }
   }
 
-  function playStory(startRatio = 0) {
+  function playStory(startRatio = 0, targetLanguage = language) {
     const safeRatio = Math.min(0.98, Math.max(0, startRatio));
-    const audioSrc = story.audio[language];
+    const audioSrc = story.audio[targetLanguage];
 
     stop();
     clearAudio(false);
@@ -141,7 +146,7 @@ export function StoryPlayer({
       };
       audio.onerror = () => {
         clearAudio(false);
-        speak(storyTextFromProgress(safeRatio), language === "zh" ? "zh-CN" : "en-US", {
+        speak(storyTextFromProgress(safeRatio, targetLanguage), targetLanguage === "zh" ? "zh-CN" : "en-US", {
           rate: speechRate,
           onEnd: () => {
             setProgress(1);
@@ -159,7 +164,7 @@ export function StoryPlayer({
         })
         .catch(() => {
           clearAudio(false);
-          speak(storyTextFromProgress(safeRatio), language === "zh" ? "zh-CN" : "en-US", {
+          speak(storyTextFromProgress(safeRatio, targetLanguage), targetLanguage === "zh" ? "zh-CN" : "en-US", {
             rate: speechRate,
             onEnd: () => {
               setProgress(1);
@@ -172,7 +177,7 @@ export function StoryPlayer({
       return;
     }
 
-    speak(storyTextFromProgress(safeRatio), language === "zh" ? "zh-CN" : "en-US", {
+    speak(storyTextFromProgress(safeRatio, targetLanguage), targetLanguage === "zh" ? "zh-CN" : "en-US", {
       rate: speechRate,
       onEnd: () => {
         setProgress(1);
@@ -231,6 +236,22 @@ export function StoryPlayer({
     }
     if (isSpeaking || isPaused || audioPlaying || audioPaused) {
       playStory(nextProgress);
+    }
+  }
+
+  function handleLanguageChange(nextLanguage: Language) {
+    if (nextLanguage === language) return;
+    const shouldContinuePlaying = isPlaying && !isPlaybackPaused;
+
+    stopStory();
+    setFinished(false);
+    setSharePanelOpen(false);
+    setShareStatus("");
+    onLanguageChange(nextLanguage);
+
+    if (shouldContinuePlaying) {
+      skipNextLanguageResetRef.current = true;
+      playStory(0, nextLanguage);
     }
   }
 
@@ -388,7 +409,7 @@ export function StoryPlayer({
         <button className="circle-back" onClick={onBack} aria-label="返回 / Back">
           ‹
         </button>
-        <LanguageToggle language={language} onChange={onLanguageChange} />
+        <LanguageToggle language={language} onChange={handleLanguageChange} />
       </div>
 
       <div className="cloud cloud-three" />

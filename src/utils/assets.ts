@@ -1,4 +1,4 @@
-const ASSET_VERSION = "20260711-android-polish";
+const ASSET_VERSION = "20260711-mobile-polish";
 
 export function assetPath(path: string) {
   const cleanPath = path.replace(/^\/+/, "");

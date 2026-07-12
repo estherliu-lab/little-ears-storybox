@@ -174,11 +174,9 @@ export function ParentSettings({ settings, onChange, onReset, onBack }: Props) {
       <img className="settings-bear" src={assetPath("assets/optimized/characters/bear.jpg")} alt="" loading="lazy" decoding="async" />
 
       <footer className="settings-footer">
-        <p className="footer-brand">© 2026 小耳朵故事机 | Little Ears StoryBox</p>
-        <p>All rights reserved</p>
+        <p className="footer-brand">© 2026 小耳朵故事机 · Little Ears StoryBox · All rights reserved</p>
         <p>X：@hann7712&nbsp;&nbsp;·&nbsp;&nbsp;Wechat: Canaan77</p>
-        <p>素材仅供本应用使用，转载商用请先联系作者</p>
-        <p>Content updates are ongoing · 内容不断更新中</p>
+        <p>素材仅供本应用使用，转载商用请先联系作者 · Content updates are ongoing · 内容不断更新中</p>
       </footer>
     </section>
   );
