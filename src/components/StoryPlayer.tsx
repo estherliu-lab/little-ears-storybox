@@ -334,6 +334,9 @@ export function StoryPlayer({
 
     return (
       <div className="share-panel" role="dialog" aria-label="分享故事 / Share story">
+        <button className="share-close" onClick={toggleSharePanel} aria-label="关闭分享 / Close share panel">
+          ×
+        </button>
         <button className="share-option wechat" onClick={() => shareStory("wechat")}>
           <span className="share-icon wechat-icon" aria-hidden="true" />
           <strong>微信聊天</strong>
@@ -433,7 +436,7 @@ export function StoryPlayer({
         </div>
       </div>
 
-      <div className="player-card">
+      <div className={`player-card ${sharePanelOpen ? "share-open" : ""}`}>
         <div className="story-progress">
           <span>00:{String(Math.floor(currentSeconds)).padStart(2, "0")}</span>
           <label className="story-progress-track" aria-label="播放进度 / Playback progress">

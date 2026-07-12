@@ -1,4 +1,4 @@
-const ASSET_VERSION = "20260711-settings-layout";
+const ASSET_VERSION = "20260711-share-overlay";
 
 export function assetPath(path: string) {
   const cleanPath = path.replace(/^\/+/, "");
