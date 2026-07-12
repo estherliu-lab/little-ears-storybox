@@ -186,6 +186,8 @@ export default function App() {
           activeMode={activeMode}
           onModeChange={setActiveMode}
           onSelect={chooseCharacter}
+          onHome={() => setScreen("home")}
+          onSettings={() => setScreen("settings")}
         />
       )}
 

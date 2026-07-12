@@ -256,6 +256,51 @@ p {
   padding-top: 96px;
 }
 
+.character-top-actions {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 6;
+}
+
+.character-nav-button {
+  min-width: 92px;
+  min-height: 52px;
+  padding: 6px 12px;
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: 24px auto;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 6px;
+  align-items: center;
+  color: #6b3a0a;
+  background: rgba(255, 248, 232, 0.92);
+  box-shadow: 0 10px 24px rgba(122, 75, 23, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+}
+
+.character-nav-button span {
+  grid-row: 1 / 3;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.character-nav-button strong {
+  align-self: end;
+  font-size: 0.92rem;
+  line-height: 1;
+}
+
+.character-nav-button small {
+  align-self: start;
+  font-size: 0.62rem;
+  font-weight: 850;
+  opacity: 0.72;
+}
+
 .section-heading {
   text-align: center;
   width: min(980px, 100%);
@@ -1404,7 +1449,8 @@ p {
 }
 
 .story-player + .settings-entry,
-.completion-screen + .settings-entry {
+.completion-screen + .settings-entry,
+.character-screen + .settings-entry {
   display: none;
 }
 
@@ -2212,8 +2258,35 @@ p {
   }
 
   .character-screen {
-    padding-top: 50px;
-    padding-bottom: 72px;
+    padding-top: 72px;
+    padding-bottom: 84px;
+  }
+
+  .character-top-actions {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .character-nav-button {
+    min-width: 82px;
+    min-height: 42px;
+    padding: 4px 8px;
+    border-radius: 15px;
+    grid-template-columns: 20px auto;
+    column-gap: 4px;
+  }
+
+  .character-nav-button span {
+    font-size: 1.12rem;
+  }
+
+  .character-nav-button strong {
+    font-size: 0.76rem;
+  }
+
+  .character-nav-button small {
+    font-size: 0.52rem;
   }
 
   .section-heading h1::after {
@@ -2653,37 +2726,37 @@ p {
 
   .settings-footer {
     margin: auto 0 0;
-    padding: 0 76px 0 8px;
-    font-size: 0.62rem;
-    line-height: 1.28;
+    width: 100%;
+    padding: 0 12px 6px;
+    font-size: 0.6rem;
+    line-height: 1.3;
     text-align: center;
     color: rgba(91, 50, 16, 0.78);
   }
 
   .settings-footer p {
-    margin: 1px auto;
-    max-width: 310px;
+    margin: 2px auto;
+    max-width: 100%;
   }
 
-  .settings-footer .footer-brand {
+  .settings-footer .footer-english,
+  .settings-footer .footer-contact {
     font-weight: 950;
     color: rgba(91, 50, 16, 0.88);
+  }
+
+  .settings-footer .footer-chinese {
+    font-weight: 800;
   }
 
   .settings-bear {
     display: block;
     top: auto;
-    right: 12px;
-    bottom: 92px;
-    width: 56px;
+    right: 16px;
+    bottom: 84px;
+    width: 44px;
     border: 3px solid rgba(255, 248, 232, 0.92);
     box-shadow: 0 10px 18px rgba(93, 59, 22, 0.16);
     z-index: 3;
-  }
-
-  .character-screen + .settings-entry {
-    top: 12px;
-    right: 12px;
-    bottom: auto;
   }
 }

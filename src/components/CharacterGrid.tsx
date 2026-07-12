@@ -14,9 +14,18 @@ type Props = {
   activeMode: StoryMode | "all";
   onModeChange: (mode: StoryMode | "all") => void;
   onSelect: (character: CharacterId) => void;
+  onHome: () => void;
+  onSettings: () => void;
 };
 
-export function CharacterGrid({ language, activeMode, onModeChange, onSelect }: Props) {
+export function CharacterGrid({
+  language,
+  activeMode,
+  onModeChange,
+  onSelect,
+  onHome,
+  onSettings,
+}: Props) {
   const visibleCharacters = (Object.keys(characters) as CharacterId[]).filter((id) => {
     return activeMode === "all" || stories.some((story) => story.character === id && story.mode === activeMode);
   });
@@ -24,6 +33,19 @@ export function CharacterGrid({ language, activeMode, onModeChange, onSelect }: 
 
   return (
     <section className="character-screen page-shell">
+      <div className="character-top-actions">
+        <button className="character-nav-button" onClick={onHome} aria-label="主页 / Home">
+          <span aria-hidden="true">←</span>
+          <strong>主页</strong>
+          <small>Home</small>
+        </button>
+        <button className="character-nav-button" onClick={onSettings} aria-label="设置 / Settings">
+          <span aria-hidden="true">⚙</span>
+          <strong>设置</strong>
+          <small>Settings</small>
+        </button>
+      </div>
+
       <div className="section-heading">
         <p className="eyebrow">{language === "zh" ? "选一个小朋友" : "Pick a little friend"}</p>
         <h1>{language === "zh" ? "今天想听谁的故事？" : "Who would you like to hear today?"}</h1>
