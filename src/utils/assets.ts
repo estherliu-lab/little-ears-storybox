@@ -1,4 +1,4 @@
-const ASSET_VERSION = "20260711-share-overlay";
+const ASSET_VERSION = "20260714-wechat-favorite";
 
 export function assetPath(path: string) {
   const cleanPath = path.replace(/^\/+/, "");

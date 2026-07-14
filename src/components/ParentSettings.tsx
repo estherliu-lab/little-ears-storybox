@@ -46,7 +46,7 @@ export function ParentSettings({ settings, onChange, onReset, onBack }: Props) {
   }
 
   return (
-    <section className="settings-page page-shell">
+    <section className={`settings-page page-shell ${showInstallGuide ? "install-guide-open" : ""}`}>
       <button className="settings-back" onClick={onBack} aria-label="返回 / Back">
         ‹
       </button>
@@ -159,6 +159,9 @@ export function ParentSettings({ settings, onChange, onReset, onBack }: Props) {
 
         {showInstallGuide && (
           <section className="install-guide" aria-label="添加到桌面说明 / Add to Home Screen guide">
+            <button className="install-guide-close" onClick={() => setShowInstallGuide(false)} aria-label="关闭 / Close">
+              ×
+            </button>
             <div>
               <strong>iPhone / iPad</strong>
               <p>用 Safari 打开应用，点底部分享按钮，再选择“添加到主屏幕”。</p>

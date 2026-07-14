@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles.css";
 
-const RELEASE_CACHE_KEY = "little-ears-release-20260711-share-overlay";
-const RELOAD_SESSION_KEY = "little-ears-share-overlay-reloaded";
+const RELEASE_CACHE_KEY = "little-ears-release-20260714-wechat-favorite";
+const RELOAD_SESSION_KEY = "little-ears-wechat-favorite-reloaded";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

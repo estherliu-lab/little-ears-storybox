@@ -276,12 +276,25 @@ export function StoryPlayer({
     }
   }
 
-  async function shareStory(target: "system" | "wechat" | "moments" | "copy" = "system") {
+  async function shareStory(target: "system" | "wechat" | "moments" | "favorite" | "copy" = "system") {
     const shareTitle = "小耳朵故事机 Little Ears StoryBox";
     const shareText = `我刚听完《${story.title.zh} / ${story.title.en}》，一起来听温柔小故事吧。`;
     const shareUrl = getShareUrl();
 
     try {
+      if (target === "favorite") {
+        const copied = await copyShareText();
+        setShareStatus(
+          isWechatBrowser()
+            ? "请点微信右上角菜单，选择“收藏”"
+            : copied
+              ? "链接已复制，打开微信后可从右上角菜单收藏"
+              : "请在微信内打开后，从右上角菜单选择收藏"
+        );
+        setSharePanelOpen(false);
+        return;
+      }
+
       if (target === "wechat" || target === "moments") {
         const copied = await copyShareText(target === "moments" ? "朋友圈文案已准备好。" : "");
         if (isWechatBrowser()) {
@@ -336,6 +349,11 @@ export function StoryPlayer({
       <div className="share-panel" role="dialog" aria-label="分享故事 / Share story">
         <button className="share-close" onClick={toggleSharePanel} aria-label="关闭分享 / Close share panel">
           ×
+        </button>
+        <button className="share-option favorite" onClick={() => shareStory("favorite")}>
+          <span className="share-icon favorite-icon" aria-hidden="true" />
+          <strong>收藏到微信</strong>
+          <small>WeChat Favorite</small>
         </button>
         <button className="share-option wechat" onClick={() => shareStory("wechat")}>
           <span className="share-icon wechat-icon" aria-hidden="true" />
