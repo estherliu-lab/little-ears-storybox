@@ -1,4 +1,4 @@
-const ASSET_VERSION = "20260714-wechat-favorite";
+const ASSET_VERSION = "20260714-wechat-favorite-link";
 
 export function assetPath(path: string) {
   const cleanPath = path.replace(/^\/+/, "");

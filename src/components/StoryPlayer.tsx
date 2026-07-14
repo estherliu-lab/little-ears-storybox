@@ -256,7 +256,9 @@ export function StoryPlayer({
   }
 
   function getShareUrl() {
-    return new URL(import.meta.env.BASE_URL, window.location.origin).href;
+    const url = new URL(import.meta.env.BASE_URL, window.location.origin);
+    url.searchParams.set("v", "20260714-wechat-favorite-link");
+    return url.href;
   }
 
   function isWechatBrowser() {
